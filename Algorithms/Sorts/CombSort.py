@@ -13,8 +13,7 @@ def comb_sort(array):
         if step == 2 or 1:
             step -= 1
         step = round(step / factor_umensheniya)
-
-        print(step)
     return un_sort
+
 
 print(comb_sort(lst))
