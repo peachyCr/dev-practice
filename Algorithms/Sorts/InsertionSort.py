@@ -11,7 +11,6 @@ def insertion(array):
         if j != i - 1:
             sort.insert(j + 1, elem)
             sort.pop(i + 1)
-            print(sort)
     return sort
 
 
