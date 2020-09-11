@@ -3,7 +3,7 @@ class Solution
 public:
     string getHint(string secret, string guess)
     {
-        int bulls = 0; int cows = 0; int size = secret.size();
+        int bulls = 0; int cows = 0;
         for (int i = 0; i < guess.size(); i++)
         {
             if (secret[i] == guess[i])
