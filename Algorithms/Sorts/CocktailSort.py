@@ -1,9 +1,9 @@
-lst = [1, 15, 22, 0, 10, -1, 90, -12]
+lst = [44, -2, -90, -3, 55, -999]
 
 def cockt(array):
     sort = array[:]
     right, left = 0, 0
-    for i in range(len(sort) - 1):
+    for i in range(len(sort)):
         for j in range(left, len(sort) - 1 - right):
             if sort[j] > sort[j + 1]:
                 sort[j], sort[j + 1] = sort[j + 1], sort[j]
@@ -16,4 +16,4 @@ def cockt(array):
     return sort
 
 
-print(coct(lst))
+print(cockt(lst))
