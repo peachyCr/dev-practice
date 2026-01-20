@@ -3,5 +3,5 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY bot.py .
-ENV BOT_TOKEN=""
+COPY db.py .
 CMD ["python", "bot.py"]
