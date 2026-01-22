@@ -1,9 +1,9 @@
-import os
 import json
 from db import get_connection
 from db import redis_client, redis_delete_cache
 from telegram import Update
-from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
+from telegram.ext import ContextTypes
+from producer import send_to_kafka
 
 
 # /start
@@ -33,6 +33,7 @@ async def add(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             conn.commit()
             await update.message.reply_text("Заметка добавлена")
 
+    send_to_kafka(chat_id, note_text)
     redis_delete_cache(chat_id)
 
 
@@ -95,20 +96,3 @@ async def clear_cache(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     redis_delete_cache(chat_id)
     await update.message.reply_text("Кэш очищен")
 
-
-def main():
-    bot_token = os.getenv("TELEGRAM_BOT_TOKEN")
-
-    app = ApplicationBuilder().token(bot_token).build()
-
-    app.add_handler(CommandHandler("start", start))
-    app.add_handler(CommandHandler("add", add))
-    app.add_handler(CommandHandler("list", get_list))
-    app.add_handler(CommandHandler("clear", clear_notes))
-    app.add_handler(CommandHandler("clear_cache", clear_cache))
-
-    app.run_polling()
-
-
-if __name__ == "__main__":
-    main()
