@@ -3,7 +3,7 @@ from kafka import KafkaProducer
 
 
 producer = KafkaProducer(
-    bootstrap_servers=["broker:9092"],
+    bootstrap_servers=["broker:29092"],
     value_serializer=lambda v: json.dumps(v).encode("utf-8")
 )
 
